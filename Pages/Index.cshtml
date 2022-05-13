@@ -4,10 +4,6 @@
     ViewData["Title"] = "Demo";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Demo</h1>
-</div>
-
 <h2>Partial using interface as model</h2>
 <p>
     <code>&lt;partial name="_SampleInterfacePartial" model="Model.InterfaceInstance" /&gt;</code>
@@ -22,23 +18,37 @@
 
 <partial name="_SampleInterfacePartial" model="Model.ClassInstance" />
 
-<h2>Partial using tuple with interface as model</h2>
+<h2>Partial using tuple with interface</h2>
 <p>
     <code>&lt;partial name="_SampleTuplePartial" model="(Model.InterfaceInstance, 1)" /&gt;</code>
 </p>
 
 <partial name="_SampleTuplePartial" model="(Model.InterfaceInstance, 1)" />
 
-<h2>Partial using tuple with implementation class as model</h2>
+<h2>Partial using tuple with implementation class</h2>
 <p>
     <code>&lt;partial name="_SampleTuplePartial" model="(Model.ClassInstance, 1)" /&gt;</code>
 </p>
 
 @* <partial name="_SampleTuplePartial" model="(Model.ClassInstance, 1)" /> *@
 
-<p>This throws an exception:</p>
+<p><strong>This one throws an exception:</strong></p>
 <p>
     <code>
         InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'System.ValueTuple`2[ImplementationClass,System.Int32]', but this ViewDataDictionary instance requires a model item of type 'System.ValueTuple`2[ISampleInterface,System.Int32]'.
     </code>
 </p>
+
+<h2>Partial using view model with interface</h2>
+<p>
+    <code>&#64;await Html.PartialAsync("_SampleModelPartial", new ModelForPartial(Model.InterfaceInstance, 1))</code>
+</p>
+
+@await Html.PartialAsync("_SampleModelPartial", new ModelForPartial(Model.InterfaceInstance, 1))
+
+<h2>Partial using view model with implementation class</h2>
+<p>
+    <code>&#64;await Html.PartialAsync("_SampleModelPartial", new ModelForPartial(Model.ClassInstance, 1))</code>
+</p>
+
+@await Html.PartialAsync("_SampleModelPartial", new ModelForPartial(Model.ClassInstance, 1))
