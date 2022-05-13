@@ -1,0 +1,44 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Demo";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Demo</h1>
+</div>
+
+<h2>Partial using interface as model</h2>
+<p>
+    <code>&lt;partial name="_SampleInterfacePartial" model="Model.InterfaceInstance" /&gt;</code>
+</p>
+
+<partial name="_SampleInterfacePartial" model="Model.InterfaceInstance" />
+
+<h2>Partial using implementation class as model</h2>
+<p>
+    <code>&lt;partial name="_SampleInterfacePartial" model="Model.ClassInstance" /&gt;</code>
+</p>
+
+<partial name="_SampleInterfacePartial" model="Model.ClassInstance" />
+
+<h2>Partial using tuple with interface as model</h2>
+<p>
+    <code>&lt;partial name="_SampleTuplePartial" model="(Model.InterfaceInstance, 1)" /&gt;</code>
+</p>
+
+<partial name="_SampleTuplePartial" model="(Model.InterfaceInstance, 1)" />
+
+<h2>Partial using tuple with implementation class as model</h2>
+<p>
+    <code>&lt;partial name="_SampleTuplePartial" model="(Model.ClassInstance, 1)" /&gt;</code>
+</p>
+
+@* <partial name="_SampleTuplePartial" model="(Model.ClassInstance, 1)" /> *@
+
+<p>This throws an exception:</p>
+<p>
+    <code>
+        InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'System.ValueTuple`2[ImplementationClass,System.Int32]', but this ViewDataDictionary instance requires a model item of type 'System.ValueTuple`2[ISampleInterface,System.Int32]'.
+    </code>
+</p>
